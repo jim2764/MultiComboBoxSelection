@@ -82,31 +82,37 @@ namespace WindowsFormsApp1
 		{
 			string sql = "SELECT * FROM Student";
 
-			if (comboBox1.SelectedIndex != 0 || comboBox2.SelectedIndex != 0 || comboBox3.SelectedIndex != 0)
-			{
-				sql += " WHERE";
+			//if (comboBox1.SelectedIndex != 0 || comboBox2.SelectedIndex != 0 || comboBox3.SelectedIndex != 0)
+			//{
+				//sql += " WHERE";
 				bool isFirst = true;
 				if (comboBox1.SelectedIndex != 0) 
 				{
-					if (!isFirst) sql += " AND";
+					if (isFirst) sql += " WHERE";
+					else sql += " AND";
+
 					sql += $" Name = '{comboBox1.Text}'";
 					isFirst = false;
 				}
 
 				if (comboBox2.SelectedIndex != 0)
 				{
-					if (!isFirst) sql += " AND";
+					if (isFirst) sql += " WHERE";
+					else sql += " AND";
+
 					sql += $" Teacher = '{comboBox2.Text}'";
 					isFirst = false;
 				}
 
 				if (comboBox3.SelectedIndex != 0)
 				{
-					if (!isFirst) sql += " AND";
+					if (isFirst) sql += " WHERE";
+					else sql += " AND"; ;
+
 					sql += $" Grade = {Convert.ToInt32(comboBox3.Text)}";
 					isFirst = false;
 				}
-			}
+			//}
 
 			SqlDbHelper sqlDbHelper = new SqlDbHelper("default");
 			DataTable table = sqlDbHelper.Select(sql, null);
